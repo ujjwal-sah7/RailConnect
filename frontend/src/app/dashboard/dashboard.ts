@@ -11,7 +11,7 @@ import { AuthService } from '../core/services/auth';
 export class Dashboard {
 
   private authService = inject(AuthService);
-  private router = inject(Router);
+  public router = inject(Router);
 
   logout(): void {
     this.authService.logout();

@@ -18,22 +18,38 @@
 
       <div class="feature-grid">
 
-        <div class="feature-card">
+        <!-- Search Trains -->
+        <div
+          class="feature-card"
+          (click)="router.navigate(['/trains/search'])"
+        >
           <h2>🔎 Search Trains</h2>
           <p>Find trains between your source and destination.</p>
         </div>
 
-        <div class="feature-card">
+        <!-- Book Ticket -->
+        <div
+          class="feature-card"
+          (click)="router.navigate(['/trains/search'])"
+        >
           <h2>🎫 Book Ticket</h2>
           <p>Book your railway ticket easily.</p>
         </div>
 
-        <div class="feature-card">
+        <!-- My Bookings -->
+        <div
+          class="feature-card"
+          (click)="router.navigate(['/user/my-bookings'])"
+        >
           <h2>📋 My Bookings</h2>
           <p>View and manage your bookings.</p>
         </div>
 
-        <div class="feature-card">
+        <!-- Account -->
+        <div
+          class="feature-card"
+          (click)="router.navigate(['/user/profile'])"
+        >
           <h2>🔐 Account</h2>
           <p>Your account is securely authenticated.</p>
         </div>
