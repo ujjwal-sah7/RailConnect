@@ -103,7 +103,7 @@ export class PnrStatus {
   errorMessage = '';
 
   private apiUrl =
-    'http://localhost:5000/api/pnr';
+    'https://railconnect-399k.onrender.com/api/pnr';
 
 
 

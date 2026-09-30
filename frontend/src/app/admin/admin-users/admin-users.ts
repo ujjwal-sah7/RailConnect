@@ -39,7 +39,7 @@ export class AdminUsers implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   private apiUrl =
-    'http://localhost:5000/api/admin/users';
+    'https://railconnect-399k.onrender.com/api/admin/users';
 
   users: User[] = [];
 

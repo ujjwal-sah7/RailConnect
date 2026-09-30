@@ -59,7 +59,7 @@ export class AdminTrains implements OnInit {
   private http = inject(HttpClient);
   private cdr = inject(ChangeDetectorRef);
 
-  private apiUrl = 'http://localhost:5000/api/admin/trains';
+  private apiUrl = 'https://railconnect-399k.onrender.com/api/admin/trains';
 
   trains: Train[] = [];
 

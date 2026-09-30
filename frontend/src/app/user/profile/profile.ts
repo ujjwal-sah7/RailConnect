@@ -57,11 +57,11 @@ export class Profile {
 
 
   private profileApiUrl =
-    'http://localhost:5000/api/users/profile';
+    'https://railconnect-399k.onrender.com/api/users/profile';
 
 
   private changePasswordApiUrl =
-    'http://localhost:5000/api/users/change-password';
+    'https://railconnect-399k.onrender.com/api/users/change-password';
 
 
   user: UserProfile | null = null;

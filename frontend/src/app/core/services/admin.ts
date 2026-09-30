@@ -24,7 +24,7 @@ export class AdminService {
 
   private http = inject(HttpClient);
 
-  private apiUrl = 'http://localhost:5000/api/admin';
+  private apiUrl = 'https://railconnect-399k.onrender.com/api/admin';
 
   // =====================================
   // GET ADMIN STATISTICS

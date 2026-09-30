@@ -65,7 +65,7 @@ export class AdminBookings implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   private apiUrl =
-    'http://localhost:5000/api/admin/bookings';
+    'https://railconnect-399k.onrender.com/api/admin/bookings';
 
   bookings: Booking[] = [];
 

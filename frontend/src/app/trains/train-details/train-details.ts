@@ -90,7 +90,7 @@ export class TrainDetails {
 
 
   private apiUrl =
-    'http://localhost:5000/api/trains';
+    'https://railconnect-399k.onrender.com/api/trains';
 
 
   // =========================

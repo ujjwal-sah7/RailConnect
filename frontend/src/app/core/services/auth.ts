@@ -20,7 +20,7 @@ export class AuthService {
 
   private http = inject(HttpClient);
 
-  private apiUrl = 'http://localhost:5000/api/auth';
+  private apiUrl = 'https://railconnect-399k.onrender.com/api/auth';
 
   // Register user
   register(

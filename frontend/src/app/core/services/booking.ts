@@ -185,7 +185,7 @@ export class BookingService {
 
 
   private apiUrl =
-    'http://localhost:5000/api/bookings';
+    'https://railconnect-399k.onrender.com/api/bookings';
 
 
   private bookingData: BookingData = {

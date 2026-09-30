@@ -55,7 +55,7 @@ export class AdminStations implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   private apiUrl =
-    'http://localhost:5000/api/admin/stations';
+    'https://railconnect-399k.onrender.com/api/admin/stations';
 
   stations: Station[] = [];
 

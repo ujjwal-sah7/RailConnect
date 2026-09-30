@@ -111,10 +111,10 @@ export class TrainSearch implements OnInit {
   // =========================
 
   private apiUrl =
-    'http://localhost:5000/api/trains';
+    'https://railconnect-399k.onrender.com/api/trains';
 
   private stationApiUrl =
-    'http://localhost:5000/api/stations';
+    'https://railconnect-399k.onrender.com/api/stations';
 
 
   // =========================
