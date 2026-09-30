@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RailConnect Admin Test</title>
+</head>
+
+<body>
+
+    <h1>RailConnect Admin Login Test</h1>
+
+    <button onclick="adminLogin()">
+        Login as Admin
+    </button>
+
+    <pre id="result"></pre>
+
+    <script>
+
+        async function adminLogin() {
+
+            const result =
+                document.getElementById("result");
+
+            result.textContent =
+                "Logging in...";
+
+            try {
+
+                const response =
+                    await fetch(
+                        "http://localhost:5000/api/auth/login",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                email:
+                                    "admin@railconnect.com",
+
+                                password:
+                                    "Admin@123"
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                result.textContent =
+                    JSON.stringify(
+                        data,
+                        null,
+                        2
+                    );
+
+
+                if (data.token) {
+
+                    localStorage.setItem(
+                        "adminToken",
+                        data.token
+                    );
+
+                    console.log(
+                        "Admin token saved successfully."
+                    );
+                }
+
+            } catch (error) {
+
+                result.textContent =
+                    "Error: " +
+                    error.message;
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>

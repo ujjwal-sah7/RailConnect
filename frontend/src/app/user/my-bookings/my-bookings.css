@@ -1,0 +1,695 @@
+.bookings-page {
+  min-height: 100vh;
+  background: #f4f7fb;
+  padding: 40px 7%;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1f2937;
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+.bookings-header {
+  max-width: 1100px;
+  margin: 0 auto 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.bookings-header h1 {
+  margin: 0 0 8px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #172033;
+}
+
+.bookings-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 15px;
+}
+
+.back-btn {
+  border: none;
+  background: #ffffff;
+  color: #374151;
+  padding: 11px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #eef2f7;
+}
+
+
+/* ================================
+   BOOKING COUNT
+================================ */
+
+.booking-count {
+  max-width: 1100px;
+  margin: 0 auto 16px;
+
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.booking-count span {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+
+/* ================================
+   BOOKING LIST
+================================ */
+
+.bookings-list {
+  max-width: 1100px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+
+/* ================================
+   BOOKING CARD
+================================ */
+
+.booking-card {
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+
+  border: 1px solid #e5e7eb;
+
+  box-shadow:
+    0 5px 20px rgba(15, 23, 42, 0.07);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.booking-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 28px rgba(15, 23, 42, 0.11);
+}
+
+
+/* ================================
+   CARD HEADER
+================================ */
+
+.card-header {
+  padding: 18px 22px;
+
+  background: #f8fafc;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pnr-section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.pnr-section .label {
+  color: #6b7280;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+.pnr-section strong {
+  color: #111827;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+}
+
+
+/* ================================
+   STATUS
+================================ */
+
+.status {
+  padding: 7px 14px;
+  border-radius: 20px;
+
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.status.confirmed {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status.cancelled {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+
+/* ================================
+   TRAIN
+================================ */
+
+.train-section {
+  padding: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid #f0f2f5;
+}
+
+.train-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.train-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: #e8f0ff;
+
+  font-size: 25px;
+}
+
+.train-info h2 {
+  margin: 0 0 5px;
+
+  font-size: 20px;
+  color: #111827;
+}
+
+.train-info p {
+  margin: 0;
+
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.class-badge {
+  padding: 8px 14px;
+
+  border-radius: 7px;
+
+  background: #eef2ff;
+  color: #4338ca;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* ================================
+   ROUTE
+================================ */
+
+.route-section {
+  padding: 24px 22px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(160px, 1fr)
+    150px
+    minmax(160px, 1fr);
+
+  align-items: center;
+
+  border-bottom: 1px solid #f0f2f5;
+}
+
+.station {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.station.destination {
+  text-align: right;
+}
+
+.station-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #9ca3af;
+}
+
+.station strong {
+  font-size: 15px;
+  color: #1f2937;
+}
+
+.route-line {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  color: #2563eb;
+}
+
+.route-line div {
+  flex: 1;
+  height: 2px;
+  background: #bfdbfe;
+}
+
+.route-line span {
+  font-size: 10px;
+}
+
+
+/* ================================
+   DETAILS
+================================ */
+
+.details-grid {
+  padding: 20px 22px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 15px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #f0f2f5;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.detail-label {
+  font-size: 11px;
+  color: #9ca3af;
+  font-weight: 600;
+}
+
+.detail-item strong {
+  font-size: 14px;
+  color: #374151;
+}
+
+.detail-item .total-fare {
+  color: #2563eb;
+  font-size: 16px;
+}
+
+
+/* ================================
+   PASSENGERS
+================================ */
+
+.passenger-section {
+  padding: 20px 22px;
+
+  border-bottom: 1px solid #f0f2f5;
+}
+
+.passenger-section h3 {
+  margin: 0 0 14px;
+
+  font-size: 15px;
+  color: #374151;
+}
+
+.passenger-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.passenger-row {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 10px 12px;
+
+  border-radius: 8px;
+
+  background: #f8fafc;
+}
+
+.passenger-number {
+  width: 27px;
+  height: 27px;
+
+  border-radius: 50%;
+
+  background: #e0e7ff;
+  color: #4338ca;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.passenger-info {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.passenger-info strong {
+  font-size: 13px;
+  color: #374151;
+}
+
+.passenger-info span {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.berth {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+
+/* ================================
+   FOOTER BUTTONS
+================================ */
+
+.card-footer {
+  padding: 16px 22px;
+
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  background: #fafafa;
+}
+
+.card-footer button {
+  border: none;
+
+  padding: 10px 15px;
+
+  border-radius: 7px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.pnr-btn {
+  background: #2563eb;
+  color: white;
+}
+
+.pnr-btn:hover {
+  background: #1d4ed8;
+}
+
+.ticket-btn {
+  background: #e5e7eb;
+  color: #6b7280;
+}
+
+.cancel-btn {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.cancel-btn:hover:not(:disabled) {
+  background: #fecaca;
+}
+
+.card-footer button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+
+/* ================================
+   LOADING
+================================ */
+
+.loading-box {
+  max-width: 500px;
+  margin: 80px auto;
+
+  text-align: center;
+
+  background: white;
+
+  padding: 40px;
+
+  border-radius: 14px;
+
+  box-shadow: 0 5px 20px rgba(15, 23, 42, 0.07);
+}
+
+.loader {
+  width: 35px;
+  height: 35px;
+
+  margin: 0 auto 15px;
+
+  border: 4px solid #e5e7eb;
+  border-top-color: #2563eb;
+
+  border-radius: 50%;
+
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-box p {
+  margin: 0;
+  color: #6b7280;
+}
+
+
+/* ================================
+   ERROR
+================================ */
+
+.error-box {
+  max-width: 700px;
+  margin: 60px auto;
+
+  padding: 22px;
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  background: #fff1f2;
+
+  border: 1px solid #fecdd3;
+
+  border-radius: 12px;
+}
+
+.error-icon {
+  width: 35px;
+  height: 35px;
+
+  border-radius: 50%;
+
+  background: #dc2626;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 700;
+}
+
+.error-box h3 {
+  margin: 0 0 5px;
+  color: #991b1b;
+}
+
+.error-box p {
+  margin: 0;
+  color: #b91c1c;
+}
+
+
+/* ================================
+   EMPTY
+================================ */
+
+.empty-box {
+  max-width: 550px;
+
+  margin: 80px auto;
+
+  padding: 50px 30px;
+
+  background: white;
+
+  text-align: center;
+
+  border-radius: 14px;
+
+  box-shadow: 0 5px 20px rgba(15, 23, 42, 0.07);
+}
+
+.empty-icon {
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+
+.empty-box h2 {
+  margin: 0 0 8px;
+  color: #1f2937;
+}
+
+.empty-box p {
+  color: #6b7280;
+  margin-bottom: 22px;
+}
+
+.search-btn {
+  border: none;
+
+  background: #2563eb;
+  color: white;
+
+  padding: 11px 20px;
+
+  border-radius: 8px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.search-btn:hover {
+  background: #1d4ed8;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 800px) {
+
+  .bookings-page {
+    padding: 25px 15px;
+  }
+
+  .bookings-header {
+    align-items: flex-start;
+  }
+
+  .bookings-header h1 {
+    font-size: 26px;
+  }
+
+  .route-section {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .station.destination {
+    text-align: left;
+  }
+
+  .route-line {
+    width: 100%;
+  }
+
+  .details-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card-footer {
+    flex-wrap: wrap;
+    justify-content: stretch;
+  }
+
+  .card-footer button {
+    flex: 1;
+  }
+
+}
+
+
+@media (max-width: 500px) {
+
+  .bookings-header {
+    flex-direction: column;
+  }
+
+  .back-btn {
+    width: 100%;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .train-section {
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .card-footer {
+    flex-direction: column;
+  }
+
+  .card-footer button {
+    width: 100%;
+  }
+
+}

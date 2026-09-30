@@ -1,0 +1,74 @@
+<div class="details-container">
+
+  @if (isLoading) {
+    <div class="loading">
+      Loading train details...
+    </div>
+  }
+
+  @if (errorMessage) {
+    <div class="error-message">
+      {{ errorMessage }}
+    </div>
+  }
+
+  @if (train && !isLoading) {
+
+    <div class="details-card">
+
+      <div class="details-header">
+        <div>
+          <h1>{{ train.trainName }}</h1>
+          <p>Train Number: {{ train.trainNumber }}</p>
+        </div>
+
+        <button class="back-btn" (click)="goBack()">
+          ← Back
+        </button>
+      </div>
+
+      <div class="route-section">
+
+        <div class="station">
+          <span class="label">Departure</span>
+          <h2>{{ train.source }}</h2>
+          <span class="time">{{ train.departureTime }}</span>
+        </div>
+
+        <div class="route-line">
+          →
+          <span>{{ train.duration }}</span>
+        </div>
+
+        <div class="station">
+          <span class="label">Arrival</span>
+          <h2>{{ train.destination }}</h2>
+          <span class="time">{{ train.arrivalTime }}</span>
+        </div>
+
+      </div>
+
+      <div class="info-grid">
+
+        <div class="info-box">
+          <span class="label">Classes</span>
+          <strong>{{ train.classes.join(', ') }}</strong>
+        </div>
+
+        <div class="info-box">
+          <span class="label">Running Days</span>
+          <strong>{{ train.runningDays.join(', ') }}</strong>
+        </div>
+
+        <div class="info-box">
+          <span class="label">Duration</span>
+          <strong>{{ train.duration }}</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>

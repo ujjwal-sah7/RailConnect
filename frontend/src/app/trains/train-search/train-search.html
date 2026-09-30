@@ -1,0 +1,202 @@
+<div class="search-container">
+
+  <div class="search-card">
+
+    <h1>🚆 RailConnect</h1>
+
+    <h2>Search Trains</h2>
+
+    <p class="subtitle">
+      Find trains by source, destination, date and class
+    </p>
+
+
+    <form (ngSubmit)="searchTrains()">
+
+      <!-- SOURCE -->
+      <div class="form-group">
+
+        <label for="source">
+          From
+        </label>
+
+        <input
+          id="source"
+          name="source"
+          type="text"
+          list="sourceStations"
+          [(ngModel)]="source"
+          placeholder="Search source station..."
+          autocomplete="off"
+          required
+        />
+
+        <datalist id="sourceStations">
+
+          @for (station of stations; track station._id) {
+
+            <option
+              [value]="station.stationName + ' (' + station.stationCode + ')'">
+            </option>
+
+          }
+
+        </datalist>
+
+      </div>
+
+
+      <!-- DESTINATION -->
+      <div class="form-group">
+
+        <label for="destination">
+          To
+        </label>
+
+        <input
+          id="destination"
+          name="destination"
+          type="text"
+          list="destinationStations"
+          [(ngModel)]="destination"
+          placeholder="Search destination station..."
+          autocomplete="off"
+          required
+        />
+
+        <datalist id="destinationStations">
+
+          @for (station of stations; track station._id) {
+
+            <option
+              [value]="station.stationName + ' (' + station.stationCode + ')'">
+            </option>
+
+          }
+
+        </datalist>
+
+      </div>
+
+
+      <!-- DATE -->
+      <div class="form-group">
+
+        <label for="date">
+          Date
+        </label>
+
+        <input
+          type="date"
+          id="date"
+          name="date"
+          [(ngModel)]="date"
+          required
+        />
+
+      </div>
+
+
+      <!-- CLASS -->
+      <div class="form-group">
+
+        <label for="travelClass">
+          Class
+        </label>
+
+        <select
+          id="travelClass"
+          name="travelClass"
+          [(ngModel)]="travelClass"
+          required
+        >
+
+          <option value="">
+            Select Class
+          </option>
+
+          <option value="Sleeper">
+            Sleeper
+          </option>
+
+          <option value="3A">
+            AC 3 Tier (3A)
+          </option>
+
+          <option value="2A">
+            AC 2 Tier (2A)
+          </option>
+
+          <option value="1A">
+            First AC (1A)
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- SEARCH BUTTON -->
+      <button
+        type="submit"
+        [disabled]="isLoading || isLoadingStations"
+      >
+
+        {{ isLoading
+          ? 'Searching...'
+          : 'Search Trains' }}
+
+      </button>
+
+    </form>
+
+
+    <!-- ERROR -->
+
+    @if (errorMessage) {
+
+      <p class="error-message">
+        {{ errorMessage }}
+      </p>
+
+    }
+
+  </div>
+
+
+  <!-- SEARCH RESULTS -->
+
+  @if (searched) {
+
+    <div class="results-container">
+
+      <div class="results-header">
+
+        <h2>
+          Available Trains
+        </h2>
+
+        @if (trains.length > 0) {
+
+          <span class="results-count">
+            {{ trains.length }} train(s) found
+          </span>
+
+        }
+
+      </div>
+
+
+      <!-- TRAIN LIST -->
+
+      <app-train-list
+        [trains]="trains"
+        [journeyDate]="date"
+        [travelClass]="travelClass">
+      </app-train-list>
+
+    </div>
+
+  }
+
+</div>

@@ -1,0 +1,112 @@
+.train-list-container {
+  width: 100%;
+}
+
+.no-trains {
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.no-trains h2 {
+  margin-bottom: 8px;
+}
+
+.no-trains p {
+  color: #666;
+}
+
+.train-card {
+  margin-bottom: 20px;
+  padding: 22px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.train-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.train-header h2 {
+  margin: 0 0 6px;
+}
+
+.train-header p {
+  margin: 0;
+  color: #666;
+}
+
+.duration {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.route-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  margin: 25px 0;
+}
+
+.station {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.station-name {
+  font-weight: 600;
+}
+
+.time {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.arrow {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.train-details {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+  font-size: 14px;
+}
+
+.action-section {
+  margin-top: 18px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.details-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+@media (max-width: 700px) {
+  .train-header,
+  .route-section,
+  .train-details {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .arrow {
+    transform: rotate(90deg);
+  }
+}

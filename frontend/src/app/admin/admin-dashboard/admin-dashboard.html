@@ -1,0 +1,210 @@
+<div class="admin-dashboard">
+
+  <!-- ===================================== -->
+  <!-- HEADER -->
+  <!-- ===================================== -->
+
+  <div class="dashboard-header">
+
+    <div>
+      <h1>Admin Dashboard</h1>
+      <p>RailConnect administration overview</p>
+    </div>
+
+  </div>
+
+
+  <!-- ===================================== -->
+  <!-- LOADING -->
+  <!-- ===================================== -->
+
+  @if (loading) {
+
+    <div class="loading">
+
+      <p>Loading dashboard statistics...</p>
+
+    </div>
+
+  }
+
+
+  <!-- ===================================== -->
+  <!-- ERROR -->
+  <!-- ===================================== -->
+
+  @if (!loading && errorMessage) {
+
+    <div class="error-message">
+
+      <p>{{ errorMessage }}</p>
+
+      <button (click)="loadStats()">
+        Retry
+      </button>
+
+    </div>
+
+  }
+
+
+  <!-- ===================================== -->
+  <!-- STATISTICS -->
+  <!-- ===================================== -->
+
+  @if (!loading && stats) {
+
+    <div class="stats-grid">
+
+
+      <!-- TOTAL USERS -->
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          👥
+        </div>
+
+        <div class="stat-content">
+
+          <p>Total Users</p>
+
+          <h2>
+            {{ stats.totalUsers }}
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <!-- TOTAL TRAINS -->
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          🚆
+        </div>
+
+        <div class="stat-content">
+
+          <p>Total Trains</p>
+
+          <h2>
+            {{ stats.totalTrains }}
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <!-- TOTAL STATIONS -->
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          🚉
+        </div>
+
+        <div class="stat-content">
+
+          <p>Total Stations</p>
+
+          <h2>
+            {{ stats.totalStations }}
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <!-- TOTAL BOOKINGS -->
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          🎫
+        </div>
+
+        <div class="stat-content">
+
+          <p>Total Bookings</p>
+
+          <h2>
+            {{ stats.totalBookings }}
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <!-- CONFIRMED BOOKINGS -->
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          ✅
+        </div>
+
+        <div class="stat-content">
+
+          <p>Confirmed Bookings</p>
+
+          <h2>
+            {{ stats.confirmedBookings }}
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <!-- CANCELLED BOOKINGS -->
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          ❌
+        </div>
+
+        <div class="stat-content">
+
+          <p>Cancelled Bookings</p>
+
+          <h2>
+            {{ stats.cancelledBookings }}
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <!-- TOTAL REVENUE -->
+
+      <div class="stat-card revenue-card">
+
+        <div class="stat-icon">
+          💰
+        </div>
+
+        <div class="stat-content">
+
+          <p>Total Revenue</p>
+
+          <h2>
+            ₹{{ stats.totalRevenue }}
+          </h2>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>

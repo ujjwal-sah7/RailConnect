@@ -1,0 +1,331 @@
+<div class="pnr-container">
+
+  <div class="pnr-card">
+
+    <h1>PNR Status</h1>
+
+    <p class="subtitle">
+      Enter your 10-digit PNR number to check booking status
+    </p>
+
+
+    <!-- PNR SEARCH -->
+
+    <form (ngSubmit)="checkPNR()">
+
+      <div class="form-group">
+
+        <label for="pnr">
+          PNR Number
+        </label>
+
+        <input
+          type="text"
+          id="pnr"
+          name="pnr"
+          [(ngModel)]="pnr"
+          maxlength="10"
+          inputmode="numeric"
+          placeholder="Enter 10-digit PNR"
+        />
+
+      </div>
+
+
+      <button
+        type="submit"
+        [disabled]="isLoading"
+      >
+        {{ isLoading ? 'Checking...' : 'Check PNR Status' }}
+      </button>
+
+    </form>
+
+
+    <!-- ERROR -->
+
+    @if (errorMessage) {
+
+      <div class="error-message">
+        {{ errorMessage }}
+      </div>
+
+    }
+
+
+    <!-- PNR RESULT -->
+
+    @if (pnrData) {
+
+      <div class="result-container">
+
+        <!-- PNR HEADER -->
+
+        <div class="pnr-header">
+
+          <div>
+
+            <span class="label">
+              PNR Number
+            </span>
+
+            <h2>
+              {{ pnrData.pnr }}
+            </h2>
+
+          </div>
+
+
+          <span
+            class="status"
+            [class.confirmed]="pnrData.status === 'Confirmed'"
+            [class.cancelled]="pnrData.status === 'Cancelled'"
+          >
+            {{ pnrData.status }}
+          </span>
+
+        </div>
+
+
+        <!-- TRAIN DETAILS -->
+
+        <div class="section">
+
+          <h3>
+            Train Details
+          </h3>
+
+
+          <div class="train-info">
+
+            <div>
+
+              <span class="label">
+                Train
+              </span>
+
+              <strong>
+                {{ pnrData.train.trainName }}
+              </strong>
+
+              <small>
+                Train No: {{ pnrData.train.trainNumber }}
+              </small>
+
+            </div>
+
+
+            <div>
+
+              <span class="label">
+                Journey Date
+              </span>
+
+              <strong>
+                {{ pnrData.journeyDate }}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div class="route">
+
+            <div class="station">
+
+              <span class="label">
+                From
+              </span>
+
+              <strong>
+                {{ pnrData.train.source }}
+              </strong>
+
+            </div>
+
+
+            <div class="arrow">
+              →
+            </div>
+
+
+            <div class="station">
+
+              <span class="label">
+                To
+              </span>
+
+              <strong>
+                {{ pnrData.train.destination }}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div class="class-info">
+
+            <span class="label">
+              Travel Class
+            </span>
+
+            <strong>
+              {{ getClassName(pnrData.travelClass) }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- PASSENGERS -->
+
+        <div class="section">
+
+          <h3>
+            Passenger Details
+          </h3>
+
+
+          @for (
+            passenger of pnrData.passengers;
+            track $index
+          ) {
+
+            <div class="passenger-card">
+
+              <div class="passenger-main">
+
+                <div>
+
+                  <span class="passenger-number">
+                    Passenger {{ $index + 1 }}
+                  </span>
+
+                  <h4>
+                    {{ passenger.name }}
+                  </h4>
+
+                  <p>
+                    Age: {{ passenger.age }}
+                    |
+                    Gender: {{ passenger.gender }}
+                  </p>
+
+                </div>
+
+
+                <span class="passenger-status">
+                  {{ passenger.status }}
+                </span>
+
+              </div>
+
+
+              <div class="seat-info">
+
+                <div>
+
+                  <span class="label">
+                    Coach
+                  </span>
+
+                  <strong>
+                    {{ passenger.coach }}
+                  </strong>
+
+                </div>
+
+
+                <div>
+
+                  <span class="label">
+                    Seat
+                  </span>
+
+                  <strong>
+                    {{ passenger.seat }}
+                  </strong>
+
+                </div>
+
+
+                <div>
+
+                  <span class="label">
+                    Berth Preference
+                  </span>
+
+                  <strong>
+                    {{ passenger.berthPreference }}
+                  </strong>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          }
+
+        </div>
+
+
+        <!-- FARE -->
+
+        <div class="section fare-section">
+
+          <h3>
+            Fare Details
+          </h3>
+
+
+          <div class="fare-row">
+
+            <span>
+              Fare per passenger
+            </span>
+
+            <strong>
+              ₹{{ pnrData.fare.farePerPassenger }}
+            </strong>
+
+          </div>
+
+
+          <div class="fare-row">
+
+            <span>
+              Passengers
+            </span>
+
+            <strong>
+              {{ pnrData.passengerCount }}
+            </strong>
+
+          </div>
+
+
+          <div class="total-fare">
+
+            <span>
+              Total Fare
+            </span>
+
+            <strong>
+              ₹{{ pnrData.fare.totalFare }}
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>

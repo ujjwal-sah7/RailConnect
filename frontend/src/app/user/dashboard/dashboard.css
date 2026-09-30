@@ -1,0 +1,249 @@
+.dashboard-container {
+  min-height: 100vh;
+  padding: 40px;
+  background: #f5f7fa;
+  box-sizing: border-box;
+}
+
+.dashboard-header {
+  max-width: 1100px;
+  margin: 0 auto 35px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 20px;
+}
+
+.dashboard-header h1 {
+  margin: 0 0 8px;
+
+  font-size: 32px;
+  color: #222;
+}
+
+.dashboard-header p {
+  margin: 0;
+
+  color: #666;
+  font-size: 15px;
+}
+
+.search-button {
+  padding: 12px 20px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #222;
+  color: white;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.search-button:hover {
+  opacity: 0.9;
+}
+
+
+/* Upcoming Journey */
+
+.upcoming-section {
+  max-width: 1100px;
+  margin: 0 auto 30px;
+}
+
+.upcoming-section h2 {
+  margin: 0 0 15px;
+
+  font-size: 22px;
+  color: #222;
+}
+
+.upcoming-card {
+  padding: 25px;
+
+  background: white;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 3px 15px rgba(0, 0, 0, 0.07);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 20px;
+}
+
+.journey-placeholder {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.journey-icon {
+  width: 55px;
+  height: 55px;
+
+  border-radius: 50%;
+
+  background: #f0f0f0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 26px;
+}
+
+.journey-placeholder h3 {
+  margin: 0 0 6px;
+
+  font-size: 17px;
+  color: #222;
+}
+
+.journey-placeholder p {
+  margin: 0;
+
+  color: #777;
+  font-size: 14px;
+}
+
+.primary-button {
+  padding: 11px 18px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #222;
+  color: white;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+/* Dashboard Cards */
+
+.dashboard-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 20px;
+}
+
+.dashboard-card {
+  position: relative;
+
+  padding: 25px;
+
+  background: white;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 3px 15px rgba(0, 0, 0, 0.07);
+
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 7px 20px rgba(0, 0, 0, 0.10);
+}
+
+.card-icon {
+  width: 52px;
+  height: 52px;
+
+  border-radius: 10px;
+
+  background: #f3f4f6;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 24px;
+
+  flex-shrink: 0;
+}
+
+.dashboard-card h3 {
+  margin: 0 0 6px;
+
+  font-size: 17px;
+  color: #222;
+}
+
+.dashboard-card p {
+  margin: 0;
+
+  color: #777;
+  font-size: 14px;
+}
+
+.card-arrow {
+  margin-left: auto;
+
+  font-size: 22px;
+  color: #777;
+}
+
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+  .dashboard-container {
+    padding: 25px 15px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dashboard-header h1 {
+    font-size: 27px;
+  }
+
+  .upcoming-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .primary-button {
+    width: 100%;
+  }
+
+}

@@ -1,0 +1,275 @@
+.pnr-container {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: #f5f7fa;
+  box-sizing: border-box;
+}
+
+.pnr-card {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 30px;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+.pnr-card h1 {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 7px;
+  font-weight: 600;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  font-size: 15px;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #555;
+}
+
+form button {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 7px;
+  background: #222;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+form button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.error-message {
+  margin-top: 18px;
+  padding: 12px;
+  border-radius: 7px;
+  background: #fff0f0;
+  text-align: center;
+}
+
+.result-container {
+  margin-top: 30px;
+}
+
+.pnr-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.pnr-header h2 {
+  margin: 6px 0 0;
+}
+
+.label {
+  display: block;
+  margin-bottom: 5px;
+  color: #777;
+  font-size: 13px;
+}
+
+.status {
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
+.status.confirmed {
+  background: #e9f8ee;
+  color: #18743a;
+}
+
+.status.cancelled {
+  background: #ffeaea;
+  color: #b42318;
+}
+
+.section {
+  padding: 25px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.section h3 {
+  margin: 0 0 18px;
+}
+
+.train-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 22px;
+}
+
+.train-info div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.train-info strong {
+  font-size: 17px;
+}
+
+.train-info small {
+  color: #666;
+}
+
+.route {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.station {
+  flex: 1;
+}
+
+.station strong {
+  font-size: 17px;
+}
+
+.arrow {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.class-info {
+  margin-top: 20px;
+}
+
+.passenger-card {
+  padding: 18px;
+  margin-bottom: 15px;
+  border: 1px solid #e4e4e4;
+  border-radius: 10px;
+  background: #fafafa;
+}
+
+.passenger-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.passenger-number {
+  font-size: 13px;
+  color: #777;
+}
+
+.passenger-main h4 {
+  margin: 5px 0;
+  font-size: 17px;
+}
+
+.passenger-main p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.passenger-status {
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: #e9f8ee;
+  color: #18743a;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.seat-info {
+  display: flex;
+  gap: 35px;
+  margin-top: 18px;
+  padding-top: 15px;
+  border-top: 1px solid #e8e8e8;
+}
+
+.seat-info strong {
+  display: block;
+}
+
+.fare-section {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.fare-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  gap: 20px;
+}
+
+.total-fare {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+  font-size: 18px;
+  gap: 20px;
+}
+
+@media (max-width: 650px) {
+  .pnr-card {
+    padding: 20px;
+  }
+
+  .pnr-header,
+  .train-info,
+  .passenger-main,
+  .seat-info,
+  .fare-row,
+  .total-fare {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .route {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .arrow {
+    transform: rotate(90deg);
+  }
+
+  .seat-info {
+    gap: 15px;
+  }
+
+  .status {
+    margin-top: 5px;
+  }
+}

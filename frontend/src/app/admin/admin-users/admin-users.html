@@ -1,0 +1,103 @@
+<div class="admin-users-container">
+
+  <div class="page-header">
+    <div>
+      <h1>User Management</h1>
+      <p>View and manage RailConnect users</p>
+    </div>
+
+    <div class="user-count">
+      Total Users: {{ users.length }}
+    </div>
+  </div>
+
+
+  <!-- Loading -->
+  <div class="loading-box" *ngIf="loading">
+    <p>Loading users...</p>
+  </div>
+
+
+  <!-- Error -->
+  <div class="error-box" *ngIf="!loading && errorMessage">
+    <p>{{ errorMessage }}</p>
+    <button (click)="loadUsers()">Retry</button>
+  </div>
+
+
+  <!-- Users Table -->
+  <div
+    class="table-container"
+    *ngIf="!loading && !errorMessage"
+  >
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Account Created</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr
+          *ngFor="let user of users; let i = index"
+        >
+
+          <td>
+            {{ i + 1 }}
+          </td>
+
+          <td>
+            <strong>
+              {{ user.name }}
+            </strong>
+          </td>
+
+          <td>
+            {{ user.email }}
+          </td>
+
+          <td>
+
+            <span
+              class="role-badge"
+              [class.admin-role]="user.role === 'admin'"
+              [class.user-role]="user.role === 'user'"
+            >
+              {{ user.role | titlecase }}
+            </span>
+
+          </td>
+
+          <td>
+            {{ user.createdAt | date:'dd/MM/yyyy' }}
+          </td>
+
+        </tr>
+
+
+        <!-- No users -->
+        <tr *ngIf="users.length === 0">
+
+          <td
+            colspan="5"
+            class="no-data"
+          >
+            No users found.
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

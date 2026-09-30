@@ -1,0 +1,214 @@
+<div class="summary-container">
+
+  <div class="summary-card">
+
+    <h1>Booking Summary</h1>
+
+    <p class="subtitle">
+      Please review your journey and passenger details
+    </p>
+
+
+    <!-- TRAIN DETAILS -->
+
+    @if (train) {
+
+      <div class="section">
+
+        <h2>Train Details</h2>
+
+        <div class="train-header">
+
+          <div>
+
+            <h3>
+              {{ train.trainName }}
+            </h3>
+
+            <p>
+              Train No: {{ train.trainNumber }}
+            </p>
+
+          </div>
+
+          <div class="duration">
+            {{ train.duration }}
+          </div>
+
+        </div>
+
+
+        <div class="route">
+
+          <div class="station">
+
+            <strong>
+              {{ train.source }}
+            </strong>
+
+            <span>
+              {{ train.departureTime }}
+            </span>
+
+          </div>
+
+
+          <div class="arrow">
+            →
+          </div>
+
+
+          <div class="station">
+
+            <strong>
+              {{ train.destination }}
+            </strong>
+
+            <span>
+              {{ train.arrivalTime }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+
+    <!-- JOURNEY DETAILS -->
+
+    <div class="section">
+
+      <h2>Journey Details</h2>
+
+      <div class="detail-row">
+
+        <span>
+          Journey Date
+        </span>
+
+        <strong>
+          {{ journeyDate }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-row">
+
+        <span>
+          Travel Class
+        </span>
+
+        <strong>
+          {{ className }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- PASSENGERS -->
+
+    <div class="section">
+
+      <h2>
+        Passengers
+      </h2>
+
+
+      @for (passenger of passengers; track $index) {
+
+        <div class="passenger-row">
+
+          <div>
+
+            <strong>
+              {{ $index + 1 }}. {{ passenger.name }}
+            </strong>
+
+            <p>
+              Age: {{ passenger.age }}
+              |
+              Gender: {{ passenger.gender }}
+            </p>
+
+          </div>
+
+          <span>
+            {{ passenger.berthPreference }}
+          </span>
+
+        </div>
+
+      }
+
+    </div>
+
+
+    <!-- FARE -->
+
+    <div class="section fare-section">
+
+      <h2>
+        Fare Details
+      </h2>
+
+
+      <div class="detail-row">
+
+        <span>
+          Fare per passenger
+        </span>
+
+        <strong>
+          ₹{{ farePerPassenger }}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-row">
+
+        <span>
+          Number of passengers
+        </span>
+
+        <strong>
+          {{ passengerCount }}
+        </strong>
+
+      </div>
+
+
+      <div class="total-row">
+
+        <span>
+          Total Fare
+        </span>
+
+        <strong>
+          ₹{{ totalFare }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- CONFIRM BOOKING -->
+
+    <button
+      type="button"
+      class="confirm-button"
+      (click)="confirmBooking()"
+    >
+      Confirm Booking
+    </button>
+
+  </div>
+
+</div>

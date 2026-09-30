@@ -1,0 +1,180 @@
+<div class="dashboard-container">
+
+  <div class="dashboard-header">
+
+    <div>
+      <h1>My Dashboard</h1>
+
+      <p>
+        Manage your journeys, bookings and profile
+      </p>
+    </div>
+
+    <button
+      class="search-button"
+      type="button"
+      (click)="goToSearch()"
+    >
+      Search Trains
+    </button>
+
+  </div>
+
+
+  <!-- Upcoming Journey -->
+
+  <section class="upcoming-section">
+
+    <h2>Upcoming Journey</h2>
+
+    <div class="upcoming-card">
+
+      <div class="journey-placeholder">
+
+        <div class="journey-icon">
+          🚆
+        </div>
+
+        <div>
+
+          <h3>No Upcoming Journey</h3>
+
+          <p>
+            Your upcoming train journey will appear here.
+          </p>
+
+        </div>
+
+      </div>
+
+      <button
+        type="button"
+        class="primary-button"
+        (click)="goToSearch()"
+      >
+        Book a Train
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- Dashboard Cards -->
+
+  <section class="dashboard-grid">
+
+    <!-- My Bookings -->
+
+    <div
+      class="dashboard-card"
+      (click)="goToBookings()"
+    >
+
+      <div class="card-icon">
+        📋
+      </div>
+
+      <div>
+
+        <h3>My Bookings</h3>
+
+        <p>
+          View your train bookings and tickets.
+        </p>
+
+      </div>
+
+      <span class="card-arrow">
+        →
+      </span>
+
+    </div>
+
+
+    <!-- PNR Status -->
+
+    <div
+      class="dashboard-card"
+      (click)="goToPNR()"
+    >
+
+      <div class="card-icon">
+        🔍
+      </div>
+
+      <div>
+
+        <h3>PNR Status</h3>
+
+        <p>
+          Check your booking PNR status.
+        </p>
+
+      </div>
+
+      <span class="card-arrow">
+        →
+      </span>
+
+    </div>
+
+
+    <!-- Profile -->
+
+    <div
+      class="dashboard-card"
+      (click)="goToProfile()"
+    >
+
+      <div class="card-icon">
+        👤
+      </div>
+
+      <div>
+
+        <h3>Profile</h3>
+
+        <p>
+          View and manage your profile.
+        </p>
+
+      </div>
+
+      <span class="card-arrow">
+        →
+      </span>
+
+    </div>
+
+
+    <!-- Cancel Ticket -->
+
+    <div
+      class="dashboard-card"
+      (click)="goToBookings()"
+    >
+
+      <div class="card-icon">
+        ❌
+      </div>
+
+      <div>
+
+        <h3>Cancel Ticket</h3>
+
+        <p>
+          Manage and cancel your bookings.
+        </p>
+
+      </div>
+
+      <span class="card-arrow">
+        →
+      </span>
+
+    </div>
+
+  </section>
+
+</div>

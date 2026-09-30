@@ -1,0 +1,404 @@
+<div class="bookings-page">
+
+  <div class="bookings-header">
+
+    <div>
+      <h1>My Bookings</h1>
+      <p>View and manage all your railway bookings</p>
+    </div>
+
+    <button
+      class="back-btn"
+      (click)="goBack()">
+      ← Back
+    </button>
+
+  </div>
+
+  @if (isLoading) {
+
+    <div class="loading-box">
+
+      <div class="loader"></div>
+
+      <p>Loading your bookings...</p>
+
+    </div>
+
+  }
+
+  @if (!isLoading && errorMessage) {
+
+    <div class="error-box">
+
+      <div class="error-icon">
+        !
+      </div>
+
+      <div>
+
+        <h3>Unable to load bookings</h3>
+
+        <p>{{ errorMessage }}</p>
+
+      </div>
+
+    </div>
+
+  }
+
+  @if (!isLoading && !errorMessage && bookings.length === 0) {
+
+    <div class="empty-box">
+
+      <div class="empty-icon">
+        🎫
+      </div>
+
+      <h2>No Bookings Found</h2>
+
+      <p>
+        You haven't made any railway bookings yet.
+      </p>
+
+      <button
+        class="search-btn"
+        (click)="searchTrains()">
+
+        Search Trains
+
+      </button>
+
+    </div>
+
+  }
+
+  @if (!isLoading && bookings.length > 0) {
+
+    <div class="booking-count">
+
+      <span>
+        {{ bookings.length }}
+      </span>
+
+      booking{{ bookings.length === 1 ? '' : 's' }} found
+
+    </div>
+
+    <div class="bookings-list">
+
+      @for (
+        booking of bookings;
+        track booking._id
+      ) {
+
+        <div class="booking-card">
+
+          <div class="card-header">
+
+            <div class="pnr-section">
+
+              <span class="label">
+                PNR
+              </span>
+
+              <strong>
+                {{ booking.pnr }}
+              </strong>
+
+            </div>
+
+            <div
+              class="status"
+              [class.cancelled]="
+                booking.status?.toLowerCase() === 'cancelled'
+              "
+              [class.confirmed]="
+                booking.status?.toLowerCase() !== 'cancelled'
+              "
+            >
+
+              {{ booking.status }}
+
+            </div>
+
+          </div>
+
+          <div class="train-section">
+
+            <div class="train-info">
+
+              <div class="train-icon">
+                🚆
+              </div>
+
+              <div>
+
+                <h2>
+                  {{ booking.trainName }}
+                </h2>
+
+                <p>
+                  Train No. {{ booking.trainNumber }}
+                </p>
+
+              </div>
+
+            </div>
+
+            <div class="class-badge">
+
+              {{ booking.travelClass }}
+
+            </div>
+
+          </div>
+
+          <div class="route-section">
+
+            <div class="station">
+
+              <span class="station-label">
+                FROM
+              </span>
+
+              <strong>
+                {{ booking.source }}
+              </strong>
+
+            </div>
+
+            <div class="route-line">
+
+              <span>●</span>
+
+              <div></div>
+
+              <span>●</span>
+
+            </div>
+
+            <div class="station destination">
+
+              <span class="station-label">
+                TO
+              </span>
+
+              <strong>
+                {{ booking.destination }}
+              </strong>
+
+            </div>
+
+          </div>
+
+          <div class="details-grid">
+
+            <div class="detail-item">
+
+              <span class="detail-label">
+                Journey Date
+              </span>
+
+              <strong>
+                {{ booking.journeyDate }}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <span class="detail-label">
+                Passengers
+              </span>
+
+              <strong>
+                {{ booking.passengerCount }}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <span class="detail-label">
+                Fare / Passenger
+              </span>
+
+              <strong>
+                ₹{{ booking.farePerPassenger }}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <span class="detail-label">
+                Total Fare
+              </span>
+
+              <strong class="total-fare">
+                ₹{{ booking.totalFare }}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <!-- =====================================
+               REFUND DETAILS
+               ===================================== -->
+
+          @if (
+            booking.status?.toLowerCase() === 'cancelled' &&
+            booking.refundAmount !== undefined
+          ) {
+
+            <div class="refund-section">
+
+              <h3>
+                Cancellation & Refund Details
+              </h3>
+
+              <div class="refund-grid">
+
+                <div class="refund-item">
+
+                  <span>
+                    Total Fare
+                  </span>
+
+                  <strong>
+                    ₹{{ booking.totalFare }}
+                  </strong>
+
+                </div>
+
+                <div class="refund-item">
+
+                  <span>
+                    Cancellation Fee
+                  </span>
+
+                  <strong>
+                    ₹{{ booking.cancellationFee }}
+                  </strong>
+
+                </div>
+
+                <div class="refund-item">
+
+                  <span>
+                    Refund Amount
+                  </span>
+
+                  <strong class="refund-amount">
+                    ₹{{ booking.refundAmount }}
+                  </strong>
+
+                </div>
+
+              </div>
+
+              <p class="refund-note">
+                * Refund shown is simulated for this project.
+                A 10% cancellation fee has been applied.
+              </p>
+
+            </div>
+
+          }
+
+
+          @if (booking.passengers?.length) {
+
+            <div class="passenger-section">
+
+              <h3>
+                Passenger Details
+              </h3>
+
+              <div class="passenger-list">
+
+                @for (
+                  passenger of booking.passengers;
+                  track $index
+                ) {
+
+                  <div class="passenger-row">
+
+                    <div class="passenger-number">
+                      {{ $index + 1 }}
+                    </div>
+
+                    <div class="passenger-info">
+
+                      <strong>
+                        {{ passenger.name }}
+                      </strong>
+
+                      <span>
+                        {{ passenger.age }} yrs
+                        •
+                        {{ passenger.gender }}
+                      </span>
+
+                    </div>
+
+                    <div class="berth">
+
+                      {{ passenger.berthPreference }}
+
+                    </div>
+
+                  </div>
+
+                }
+
+              </div>
+
+            </div>
+
+          }
+
+
+          <div class="card-footer">
+
+            <button
+              class="pnr-btn"
+              (click)="checkPNR(booking.pnr)">
+
+              Check PNR Status
+
+            </button>
+
+            <button
+              class="ticket-btn"
+              (click)="downloadTicket(booking)">
+
+              Download Ticket
+
+            </button>
+
+            <button
+              class="cancel-btn"
+              [disabled]="
+                booking.status?.toLowerCase() === 'cancelled'
+              "
+              (click)="cancelTicket(booking)">
+
+              Cancel Ticket
+
+            </button>
+
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+  }
+
+</div>

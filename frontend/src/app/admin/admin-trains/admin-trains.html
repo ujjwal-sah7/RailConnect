@@ -1,0 +1,794 @@
+<div class="admin-trains">
+
+  <!-- ================================
+       HEADER
+  ================================= -->
+
+  <div class="page-header">
+
+    <div>
+      <h1>Train Management</h1>
+      <p>View and manage all RailConnect trains</p>
+    </div>
+
+    <button
+      class="add-button"
+      type="button"
+      (click)="showAddForm = !showAddForm; showEditForm = false">
+
+      @if (!showAddForm) {
+        + Add Train
+      }
+
+      @if (showAddForm) {
+        Close Form
+      }
+
+    </button>
+
+  </div>
+
+
+  <!-- ================================
+       ADD TRAIN FORM
+  ================================= -->
+
+  @if (showAddForm) {
+
+    <div class="form-card">
+
+      <div class="form-header">
+
+        <div>
+          <h2>Add New Train</h2>
+          <p>Enter the train details below</p>
+        </div>
+
+      </div>
+
+
+      <form (submit)="createTrain()">
+
+        <div class="form-grid">
+
+          <!-- TRAIN NUMBER -->
+
+          <div class="form-group">
+
+            <label for="trainNumber">
+              Train Number
+            </label>
+
+            <input
+              id="trainNumber"
+              type="text"
+              placeholder="e.g. 12345"
+              [(ngModel)]="newTrain.trainNumber"
+              name="trainNumber"
+              required
+            />
+
+          </div>
+
+
+          <!-- TRAIN NAME -->
+
+          <div class="form-group">
+
+            <label for="trainName">
+              Train Name
+            </label>
+
+            <input
+              id="trainName"
+              type="text"
+              placeholder="e.g. RailConnect Express"
+              [(ngModel)]="newTrain.trainName"
+              name="trainName"
+              required
+            />
+
+          </div>
+
+
+          <!-- SOURCE -->
+
+          <div class="form-group">
+
+            <label for="source">
+              Source
+            </label>
+
+            <input
+              id="source"
+              type="text"
+              placeholder="e.g. New Delhi"
+              [(ngModel)]="newTrain.source"
+              name="source"
+              required
+            />
+
+          </div>
+
+
+          <!-- DESTINATION -->
+
+          <div class="form-group">
+
+            <label for="destination">
+              Destination
+            </label>
+
+            <input
+              id="destination"
+              type="text"
+              placeholder="e.g. Mumbai"
+              [(ngModel)]="newTrain.destination"
+              name="destination"
+              required
+            />
+
+          </div>
+
+
+          <!-- DEPARTURE TIME -->
+
+          <div class="form-group">
+
+            <label for="departureTime">
+              Departure Time
+            </label>
+
+            <input
+              id="departureTime"
+              type="time"
+              [(ngModel)]="newTrain.departureTime"
+              name="departureTime"
+              required
+            />
+
+          </div>
+
+
+          <!-- ARRIVAL TIME -->
+
+          <div class="form-group">
+
+            <label for="arrivalTime">
+              Arrival Time
+            </label>
+
+            <input
+              id="arrivalTime"
+              type="time"
+              [(ngModel)]="newTrain.arrivalTime"
+              name="arrivalTime"
+              required
+            />
+
+          </div>
+
+
+          <!-- DURATION -->
+
+          <div class="form-group">
+
+            <label for="duration">
+              Duration
+            </label>
+
+            <input
+              id="duration"
+              type="text"
+              placeholder="e.g. 12h 30m"
+              [(ngModel)]="newTrain.duration"
+              name="duration"
+              required
+            />
+
+          </div>
+
+
+          <!-- RUNNING DAYS -->
+
+          <div class="form-group full-width">
+
+            <label>
+              Running Days
+            </label>
+
+            <div class="checkbox-group">
+
+              @for (day of weekDays; track day) {
+
+                <label class="checkbox-label">
+
+                  <input
+                    type="checkbox"
+                    [checked]="newTrain.runningDays.includes(day)"
+                    (change)="toggleRunningDay(day)"
+                  />
+
+                  <span>
+                    {{ day }}
+                  </span>
+
+                </label>
+
+              }
+
+            </div>
+
+          </div>
+
+
+          <!-- AVAILABLE CLASSES -->
+
+          <div class="form-group full-width">
+
+            <label>
+              Available Classes
+            </label>
+
+            <div class="checkbox-group">
+
+              @for (
+                trainClass of availableClasses;
+                track trainClass
+              ) {
+
+                <label class="checkbox-label">
+
+                  <input
+                    type="checkbox"
+                    [checked]="newTrain.classes.includes(trainClass)"
+                    (change)="toggleClass(trainClass)"
+                  />
+
+                  <span>
+                    {{ trainClass }}
+                  </span>
+
+                </label>
+
+              }
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- FORM ERROR -->
+
+        @if (formError) {
+
+          <div class="form-error">
+            {{ formError }}
+          </div>
+
+        }
+
+
+        <!-- FORM ACTIONS -->
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="cancel-button"
+            (click)="showAddForm = false">
+
+            Cancel
+
+          </button>
+
+
+          <button
+            type="submit"
+            class="save-button"
+            [disabled]="saving">
+
+            @if (!saving) {
+              Save Train
+            }
+
+            @if (saving) {
+              Saving...
+            }
+
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  }
+
+
+  <!-- ================================
+       EDIT TRAIN FORM
+  ================================= -->
+
+  @if (showEditForm) {
+
+    <div class="form-card edit-form-card">
+
+      <div class="form-header">
+
+        <div>
+
+          <h2>Edit Train</h2>
+
+          <p>
+            Update the selected train details
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <form (submit)="updateTrain()">
+
+        <div class="form-grid">
+
+          <!-- TRAIN NUMBER -->
+
+          <div class="form-group">
+
+            <label for="editTrainNumber">
+              Train Number
+            </label>
+
+            <input
+              id="editTrainNumber"
+              type="text"
+              [(ngModel)]="editTrain.trainNumber"
+              name="editTrainNumber"
+              required
+            />
+
+          </div>
+
+
+          <!-- TRAIN NAME -->
+
+          <div class="form-group">
+
+            <label for="editTrainName">
+              Train Name
+            </label>
+
+            <input
+              id="editTrainName"
+              type="text"
+              [(ngModel)]="editTrain.trainName"
+              name="editTrainName"
+              required
+            />
+
+          </div>
+
+
+          <!-- SOURCE -->
+
+          <div class="form-group">
+
+            <label for="editSource">
+              Source
+            </label>
+
+            <input
+              id="editSource"
+              type="text"
+              [(ngModel)]="editTrain.source"
+              name="editSource"
+              required
+            />
+
+          </div>
+
+
+          <!-- DESTINATION -->
+
+          <div class="form-group">
+
+            <label for="editDestination">
+              Destination
+            </label>
+
+            <input
+              id="editDestination"
+              type="text"
+              [(ngModel)]="editTrain.destination"
+              name="editDestination"
+              required
+            />
+
+          </div>
+
+
+          <!-- DEPARTURE -->
+
+          <div class="form-group">
+
+            <label for="editDepartureTime">
+              Departure Time
+            </label>
+
+            <input
+              id="editDepartureTime"
+              type="time"
+              [(ngModel)]="editTrain.departureTime"
+              name="editDepartureTime"
+              required
+            />
+
+          </div>
+
+
+          <!-- ARRIVAL -->
+
+          <div class="form-group">
+
+            <label for="editArrivalTime">
+              Arrival Time
+            </label>
+
+            <input
+              id="editArrivalTime"
+              type="time"
+              [(ngModel)]="editTrain.arrivalTime"
+              name="editArrivalTime"
+              required
+            />
+
+          </div>
+
+
+          <!-- DURATION -->
+
+          <div class="form-group">
+
+            <label for="editDuration">
+              Duration
+            </label>
+
+            <input
+              id="editDuration"
+              type="text"
+              [(ngModel)]="editTrain.duration"
+              name="editDuration"
+              required
+            />
+
+          </div>
+
+
+          <!-- RUNNING DAYS -->
+
+          <div class="form-group full-width">
+
+            <label>
+              Running Days
+            </label>
+
+            <div class="checkbox-group">
+
+              @for (day of weekDays; track day) {
+
+                <label class="checkbox-label">
+
+                  <input
+                    type="checkbox"
+                    [checked]="editTrain.runningDays.includes(day)"
+                    (change)="toggleEditRunningDay(day)"
+                  />
+
+                  <span>
+                    {{ day }}
+                  </span>
+
+                </label>
+
+              }
+
+            </div>
+
+          </div>
+
+
+          <!-- CLASSES -->
+
+          <div class="form-group full-width">
+
+            <label>
+              Available Classes
+            </label>
+
+            <div class="checkbox-group">
+
+              @for (
+                trainClass of availableClasses;
+                track trainClass
+              ) {
+
+                <label class="checkbox-label">
+
+                  <input
+                    type="checkbox"
+                    [checked]="editTrain.classes.includes(trainClass)"
+                    (change)="toggleEditClass(trainClass)"
+                  />
+
+                  <span>
+                    {{ trainClass }}
+                  </span>
+
+                </label>
+
+              }
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- EDIT ERROR -->
+
+        @if (editFormError) {
+
+          <div class="form-error">
+            {{ editFormError }}
+          </div>
+
+        }
+
+
+        <!-- EDIT ACTIONS -->
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="cancel-button"
+            (click)="cancelEdit()">
+
+            Cancel
+
+          </button>
+
+
+          <button
+            type="submit"
+            class="save-button"
+            [disabled]="updating">
+
+            @if (!updating) {
+              Update Train
+            }
+
+            @if (updating) {
+              Updating...
+            }
+
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  }
+
+
+  <!-- ================================
+       LOADING
+  ================================= -->
+
+  @if (loading) {
+
+    <div class="loading">
+
+      <p>Loading trains...</p>
+
+    </div>
+
+  }
+
+
+  <!-- ================================
+       ERROR
+  ================================= -->
+
+  @if (!loading && errorMessage) {
+
+    <div class="error-message">
+
+      <p>{{ errorMessage }}</p>
+
+      <button
+        type="button"
+        (click)="loadTrains()">
+
+        Retry
+
+      </button>
+
+    </div>
+
+  }
+
+
+  <!-- ================================
+       TRAIN TABLE
+  ================================= -->
+
+  @if (!loading && !errorMessage) {
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Train No.</th>
+
+            <th>Train Name</th>
+
+            <th>Source</th>
+
+            <th>Destination</th>
+
+            <th>Departure</th>
+
+            <th>Arrival</th>
+
+            <th>Duration</th>
+
+            <th>Classes</th>
+
+            <th>Actions</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          @for (train of trains; track train._id) {
+
+            <tr>
+
+              <td>
+                <strong>
+                  {{ train.trainNumber }}
+                </strong>
+              </td>
+
+              <td>
+                {{ train.trainName }}
+              </td>
+
+              <td>
+                {{ train.source }}
+              </td>
+
+              <td>
+                {{ train.destination }}
+              </td>
+
+              <td>
+                {{ train.departureTime }}
+              </td>
+
+              <td>
+                {{ train.arrivalTime }}
+              </td>
+
+              <td>
+                {{ train.duration }}
+              </td>
+
+              <td>
+
+                <div class="class-list">
+
+                  @for (
+                    trainClass of train.classes;
+                    track trainClass
+                  ) {
+
+                    <span class="class-badge">
+                      {{ trainClass }}
+                    </span>
+
+                  }
+
+                </div>
+
+              </td>
+
+
+              <!-- ACTIONS -->
+
+              <td>
+
+                <div class="action-buttons">
+
+                  <!-- EDIT BUTTON -->
+
+                  <button
+                    class="edit-button"
+                    type="button"
+                    (click)="startEdit(train)">
+
+                    Edit
+
+                  </button>
+
+
+                  <!-- DELETE BUTTON -->
+
+                  <button
+                    class="delete-button"
+                    type="button"
+                    (click)="deleteTrain(train)"
+                    [disabled]="deletingTrainId === train._id">
+
+                    @if (deletingTrainId !== train._id) {
+                      Delete
+                    }
+
+                    @if (deletingTrainId === train._id) {
+                      Deleting...
+                    }
+
+                  </button>
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          }
+
+
+          <!-- NO TRAINS -->
+
+          @if (trains.length === 0) {
+
+            <tr>
+
+              <td
+                colspan="9"
+                class="no-data">
+
+                No trains found.
+
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  }
+
+</div>

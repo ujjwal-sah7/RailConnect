@@ -1,0 +1,270 @@
+<div class="profile-page">
+
+  <div class="profile-container">
+
+    <!-- Header -->
+
+    <div class="profile-header">
+
+      <button
+        class="back-button"
+        type="button"
+        (click)="goBack()"
+      >
+        ← Back
+      </button>
+
+      <div>
+
+        <h1>My Profile</h1>
+
+        <p>
+          Manage your RailConnect account
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- Loading -->
+
+    <div
+      class="loading"
+      *ngIf="isLoading"
+    >
+      Loading profile...
+    </div>
+
+
+    <!-- Error -->
+
+    <div
+      class="error-message"
+      *ngIf="!isLoading && errorMessage"
+    >
+      {{ errorMessage }}
+    </div>
+
+
+    <!-- Profile -->
+
+    <div
+      class="profile-card"
+      *ngIf="!isLoading && user"
+    >
+
+      <!-- Profile Icon -->
+
+      <div class="profile-icon">
+
+        {{ user.name.charAt(0).toUpperCase() }}
+
+      </div>
+
+
+      <!-- User Information -->
+
+      <div class="profile-info">
+
+        <h2>
+          {{ user.name }}
+        </h2>
+
+        <p class="email">
+          {{ user.email }}
+        </p>
+
+      </div>
+
+
+      <!-- Account Information -->
+
+      <div class="account-section">
+
+        <h3>
+          Account Information
+        </h3>
+
+
+        <div class="info-row">
+
+          <span class="label">
+            Full Name
+          </span>
+
+          <span class="value">
+            {{ user.name }}
+          </span>
+
+        </div>
+
+
+        <div class="info-row">
+
+          <span class="label">
+            Email Address
+          </span>
+
+          <span class="value">
+            {{ user.email }}
+          </span>
+
+        </div>
+
+
+        <div class="info-row">
+
+          <span class="label">
+            Account Created
+          </span>
+
+          <span class="value">
+            {{ user.createdAt | date:'dd MMM yyyy' }}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- Profile Actions -->
+
+      <div class="profile-actions">
+
+        <button
+          class="password-button"
+          type="button"
+          (click)="changePassword()"
+        >
+          🔒 Change Password
+        </button>
+
+
+        <button
+          class="logout-button"
+          type="button"
+          (click)="logout()"
+        >
+          🚪 Logout
+        </button>
+
+      </div>
+
+
+      <!-- Change Password Form -->
+
+      <div
+        class="password-section"
+        *ngIf="showPasswordForm"
+      >
+
+        <h3>
+          Change Password
+        </h3>
+
+        <p class="password-description">
+          Enter your current password and choose a new password.
+        </p>
+
+
+        <!-- Current Password -->
+
+        <div class="form-group">
+
+          <label for="currentPassword">
+            Current Password
+          </label>
+
+          <input
+            id="currentPassword"
+            type="password"
+            [(ngModel)]="currentPassword"
+            placeholder="Enter current password"
+          />
+
+        </div>
+
+
+        <!-- New Password -->
+
+        <div class="form-group">
+
+          <label for="newPassword">
+            New Password
+          </label>
+
+          <input
+            id="newPassword"
+            type="password"
+            [(ngModel)]="newPassword"
+            placeholder="Enter new password"
+          />
+
+        </div>
+
+
+        <!-- Confirm Password -->
+
+        <div class="form-group">
+
+          <label for="confirmPassword">
+            Confirm New Password
+          </label>
+
+          <input
+            id="confirmPassword"
+            type="password"
+            [(ngModel)]="confirmPassword"
+            placeholder="Confirm new password"
+          />
+
+        </div>
+
+
+        <!-- Error -->
+
+        <div
+          class="password-error"
+          *ngIf="passwordError"
+        >
+          {{ passwordError }}
+        </div>
+
+
+        <!-- Success -->
+
+        <div
+          class="password-success"
+          *ngIf="passwordMessage"
+        >
+          {{ passwordMessage }}
+        </div>
+
+
+        <!-- Submit -->
+
+        <button
+          class="change-password-submit"
+          type="button"
+          [disabled]="passwordLoading"
+          (click)="submitPasswordChange()"
+        >
+
+          <span *ngIf="!passwordLoading">
+            Change Password
+          </span>
+
+          <span *ngIf="passwordLoading">
+            Changing Password...
+          </span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

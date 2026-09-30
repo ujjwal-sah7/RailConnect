@@ -1,0 +1,141 @@
+<div class="train-list">
+
+  @if (trains.length === 0) {
+
+    <div class="no-results">
+
+      <h3>
+        No trains found
+      </h3>
+
+      <p>
+        Try changing your search criteria.
+      </p>
+
+    </div>
+
+  }
+
+
+  @for (train of trains; track train._id) {
+
+    <div class="train-card">
+
+      <!-- TRAIN HEADER -->
+
+      <div class="train-header">
+
+        <div>
+
+          <h3>
+            {{ train.trainName }}
+          </h3>
+
+          <p>
+            Train No: {{ train.trainNumber }}
+          </p>
+
+        </div>
+
+        <div class="duration">
+          {{ train.duration }}
+        </div>
+
+      </div>
+
+
+      <!-- ROUTE -->
+
+      <div class="route-info">
+
+        <div class="station">
+
+          <span>
+            {{ train.source }}
+          </span>
+
+          <small>
+            Departure: {{ train.departureTime }}
+          </small>
+
+        </div>
+
+
+        <div class="arrow">
+          →
+        </div>
+
+
+        <div class="station">
+
+          <span>
+            {{ train.destination }}
+          </span>
+
+          <small>
+            Arrival: {{ train.arrivalTime }}
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <!-- CLASS -->
+
+      <div class="train-classes">
+
+        <strong>
+          Available Classes:
+        </strong>
+
+        <span>
+          {{ train.classes.join(', ') }}
+        </span>
+
+      </div>
+
+
+      <!-- RUNNING DAYS -->
+
+      <div class="running-days">
+
+        <strong>
+          Running Days:
+        </strong>
+
+        <span>
+          {{ train.runningDays.join(', ') }}
+        </span>
+
+      </div>
+
+
+      <!-- ACTION BUTTONS -->
+
+      <div class="train-actions">
+
+        <button
+          type="button"
+          class="details-button"
+          (click)="viewDetails(train._id)"
+        >
+          View Details
+        </button>
+
+
+        <button
+          type="button"
+          class="book-button"
+          (click)="bookTrain(train)"
+        >
+          Book Now
+        </button>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>

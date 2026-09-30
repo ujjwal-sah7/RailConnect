@@ -1,0 +1,438 @@
+<div class="admin-stations">
+
+  <!-- HEADER -->
+  <div class="page-header">
+
+    <div>
+      <h1>Station Management</h1>
+      <p>View and manage all RailConnect stations</p>
+    </div>
+
+    <button
+      class="add-button"
+      type="button"
+      (click)="showAddForm = !showAddForm; showEditForm = false">
+
+      @if (!showAddForm) {
+        + Add Station
+      }
+
+      @if (showAddForm) {
+        Close Form
+      }
+
+    </button>
+
+  </div>
+
+
+  <!-- ADD STATION FORM -->
+  @if (showAddForm) {
+
+    <div class="form-card">
+
+      <div class="form-header">
+        <div>
+          <h2>Add New Station</h2>
+          <p>Enter the station details below</p>
+        </div>
+      </div>
+
+      <form (submit)="createStation()">
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label for="stationCode">
+              Station Code
+            </label>
+
+            <input
+              id="stationCode"
+              type="text"
+              placeholder="e.g. NDLS"
+              [(ngModel)]="newStation.stationCode"
+              name="stationCode"
+              required
+            />
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="stationName">
+              Station Name
+            </label>
+
+            <input
+              id="stationName"
+              type="text"
+              placeholder="e.g. New Delhi"
+              [(ngModel)]="newStation.stationName"
+              name="stationName"
+              required
+            />
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="city">
+              City
+            </label>
+
+            <input
+              id="city"
+              type="text"
+              placeholder="e.g. New Delhi"
+              [(ngModel)]="newStation.city"
+              name="city"
+              required
+            />
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="state">
+              State
+            </label>
+
+            <input
+              id="state"
+              type="text"
+              placeholder="e.g. Delhi"
+              [(ngModel)]="newStation.state"
+              name="state"
+              required
+            />
+
+          </div>
+
+        </div>
+
+
+        @if (formError) {
+
+          <div class="form-error">
+            {{ formError }}
+          </div>
+
+        }
+
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="cancel-button"
+            (click)="showAddForm = false">
+
+            Cancel
+
+          </button>
+
+
+          <button
+            type="submit"
+            class="save-button"
+            [disabled]="saving">
+
+            @if (!saving) {
+              Save Station
+            }
+
+            @if (saving) {
+              Saving...
+            }
+
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  }
+
+
+  <!-- EDIT STATION FORM -->
+  @if (showEditForm) {
+
+    <div class="form-card edit-form-card">
+
+      <div class="form-header">
+
+        <div>
+          <h2>Edit Station</h2>
+          <p>Update the selected station details</p>
+        </div>
+
+      </div>
+
+
+      <form (submit)="updateStation()">
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label for="editStationCode">
+              Station Code
+            </label>
+
+            <input
+              id="editStationCode"
+              type="text"
+              [(ngModel)]="editStation.stationCode"
+              name="editStationCode"
+              required
+            />
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="editStationName">
+              Station Name
+            </label>
+
+            <input
+              id="editStationName"
+              type="text"
+              [(ngModel)]="editStation.stationName"
+              name="editStationName"
+              required
+            />
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="editCity">
+              City
+            </label>
+
+            <input
+              id="editCity"
+              type="text"
+              [(ngModel)]="editStation.city"
+              name="editCity"
+              required
+            />
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="editState">
+              State
+            </label>
+
+            <input
+              id="editState"
+              type="text"
+              [(ngModel)]="editStation.state"
+              name="editState"
+              required
+            />
+
+          </div>
+
+        </div>
+
+
+        @if (editFormError) {
+
+          <div class="form-error">
+            {{ editFormError }}
+          </div>
+
+        }
+
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="cancel-button"
+            (click)="cancelEdit()">
+
+            Cancel
+
+          </button>
+
+
+          <button
+            type="submit"
+            class="save-button"
+            [disabled]="updating">
+
+            @if (!updating) {
+              Update Station
+            }
+
+            @if (updating) {
+              Updating...
+            }
+
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  }
+
+
+  <!-- LOADING -->
+  @if (loading) {
+
+    <div class="loading">
+      <p>Loading stations...</p>
+    </div>
+
+  }
+
+
+  <!-- ERROR -->
+  @if (!loading && errorMessage) {
+
+    <div class="error-message">
+
+      <p>{{ errorMessage }}</p>
+
+      <button
+        type="button"
+        (click)="loadStations()">
+
+        Retry
+
+      </button>
+
+    </div>
+
+  }
+
+
+  <!-- STATION TABLE -->
+  @if (!loading && !errorMessage) {
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Station Code</th>
+            <th>Station Name</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Actions</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          @for (station of stations; track station._id) {
+
+            <tr>
+
+              <td>
+                <strong>
+                  {{ station.stationCode }}
+                </strong>
+              </td>
+
+              <td>
+                {{ station.stationName }}
+              </td>
+
+              <td>
+                {{ station.city }}
+              </td>
+
+              <td>
+                {{ station.state }}
+              </td>
+
+
+              <td>
+
+                <div class="action-buttons">
+
+                  <!-- EDIT -->
+                  <button
+                    class="edit-button"
+                    type="button"
+                    (click)="startEdit(station)">
+
+                    Edit
+
+                  </button>
+
+
+                  <!-- DELETE -->
+                  <button
+                    class="delete-button"
+                    type="button"
+                    (click)="deleteStation(station)"
+                    [disabled]="deletingStationId === station._id">
+
+                    @if (deletingStationId !== station._id) {
+                      Delete
+                    }
+
+                    @if (deletingStationId === station._id) {
+                      Deleting...
+                    }
+
+                  </button>
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          }
+
+
+          @if (stations.length === 0) {
+
+            <tr>
+
+              <td
+                colspan="5"
+                class="no-data">
+
+                No stations found.
+
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  }
+
+</div>
