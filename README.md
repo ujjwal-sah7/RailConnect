@@ -94,32 +94,6 @@ MongoDB Atlas
 
 This architecture provides a clear separation between the presentation layer, application logic, and data layer, making the application easier to maintain, test, and extend.
 
-📂 Project Structure
-
-RailConnect/
-│
-├── frontend/
-│   ├── src/
-│   ├── public/
-│   ├── angular.json
-│   ├── package.json
-│   └── tsconfig.json
-│
-├── backend/
-│   ├── src/
-│   │   ├── config/
-│   │   ├── controllers/
-│   │   ├── middleware/
-│   │   ├── models/
-│   │   ├── routes/
-│   │   ├── services/
-│   │   ├── utils/
-│   │   └── server.js
-│   │
-│   └── package.json
-│
-├── .gitignore
-└── README.md
 
 🔄 Application Workflow
 
