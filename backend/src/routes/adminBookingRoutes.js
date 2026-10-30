@@ -1,29 +1,30 @@
+
 const express = require("express");
 
 const {
-    getAllAdminBookings
+  getAllAdminBookings,
+  updateAdminBookingStatus
 } = require("../controllers/adminBookingController");
 
-const protect =
-    require("../middleware/authMiddleware");
-
-const adminMiddleware =
-    require("../middleware/adminMiddleware");
-
+const protect = require("../middleware/authMiddleware");
+const adminMiddleware = require("../middleware/adminMiddleware");
 
 const router = express.Router();
 
-
-// =====================================
-// GET ALL BOOKINGS
-// =====================================
-
+// Get all bookings
 router.get(
-    "/",
-    protect,
-    adminMiddleware,
-    getAllAdminBookings
+  "/",
+  protect,
+  adminMiddleware,
+  getAllAdminBookings
 );
 
+// Update a booking's status
+router.patch(
+  "/:id/status",
+  protect,
+  adminMiddleware,
+  updateAdminBookingStatus
+);
 
 module.exports = router;
