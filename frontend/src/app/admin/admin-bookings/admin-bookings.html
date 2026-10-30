@@ -1,6 +1,6 @@
+
 <div class="admin-bookings-container">
 
-  <!-- Header -->
   <div class="page-header">
     <div>
       <h1>Booking Management</h1>
@@ -12,39 +12,30 @@
     </div>
   </div>
 
-
-  <!-- Loading -->
-  <div
-    class="loading-box"
-    *ngIf="loading"
-  >
-    <p>Loading bookings...</p>
+  <div class="success-box" *ngIf="successMessage">
+    <p>{{ successMessage }}</p>
   </div>
 
-
-  <!-- Error -->
-  <div
-    class="error-box"
-    *ngIf="!loading && errorMessage"
-  >
+  <div class="error-box" *ngIf="errorMessage">
     <p>{{ errorMessage }}</p>
 
     <button
-      (click)="loadBookings()"
-    >
+      *ngIf="!loading"
+      type="button"
+      (click)="loadBookings()">
       Retry
     </button>
   </div>
 
+  <div class="loading-box" *ngIf="loading">
+    <p>Loading bookings...</p>
+  </div>
 
-  <!-- Booking Table -->
   <div
     class="table-container"
-    *ngIf="!loading && !errorMessage"
-  >
+    *ngIf="!loading && !errorMessage">
 
     <table>
-
       <thead>
         <tr>
           <th>#</th>
@@ -61,133 +52,107 @@
         </tr>
       </thead>
 
-
       <tbody>
-
-        <!-- Booking Row -->
         <ng-container
-          *ngFor="let booking of bookings; let i = index"
-        >
+          *ngFor="let booking of bookings; let i = index">
 
           <tr>
+            <td>{{ i + 1 }}</td>
 
-            <!-- Number -->
-            <td>
-              {{ i + 1 }}
-            </td>
-
-
-            <!-- PNR -->
             <td>
               <strong class="pnr">
                 {{ booking.pnr }}
               </strong>
             </td>
 
-
-            <!-- User -->
             <td>
-
               <div class="user-info">
-
                 <strong>
-                  {{ booking.user?.name }}
+                  {{ booking.user?.name || 'Unknown user' }}
                 </strong>
 
                 <small>
-                  {{ booking.user?.email }}
+                  {{ booking.user?.email || 'No email' }}
                 </small>
-
               </div>
-
             </td>
 
-
-            <!-- Train -->
             <td>
-
               <div class="train-info">
-
                 <strong>
-                  {{ booking.train?.trainNumber }}
+                  {{ booking.train?.trainNumber || 'N/A' }}
                 </strong>
 
                 <small>
-                  {{ booking.train?.trainName }}
+                  {{ booking.train?.trainName || 'Train details unavailable' }}
                 </small>
 
                 <span>
-                  {{ booking.train?.source }}
+                  {{ booking.train?.source || '—' }}
                   →
-                  {{ booking.train?.destination }}
+                  {{ booking.train?.destination || '—' }}
                 </span>
-
               </div>
-
             </td>
 
+            <td>{{ booking.journeyDate }}</td>
 
-            <!-- Journey Date -->
-            <td>
-              {{ booking.journeyDate }}
-            </td>
-
-
-            <!-- Class -->
             <td>
               <span class="class-badge">
                 {{ booking.travelClass }}
               </span>
             </td>
 
-
-            <!-- Passenger Count -->
             <td>
-
               <span class="passenger-count">
                 {{ booking.passengers?.length || 0 }}
               </span>
-
             </td>
 
+            <td>₹{{ booking.totalFare }}</td>
 
-            <!-- Fare -->
             <td>
-              ₹{{ booking.totalFare }}
+              <div class="status-management">
+
+                <span
+                  class="status-badge"
+                  [class.confirmed]="booking.status === 'Confirmed'"
+                  [class.cancelled]="booking.status === 'Cancelled'"
+                  [class.pending]="booking.status === 'Pending'">
+                  {{ booking.status }}
+                </span>
+
+                <select
+                  [ngModel]="booking.status"
+                  [ngModelOptions]="{ standalone: true }"
+                  [disabled]="updatingBookingId !== null"
+                  aria-label="Update booking status"
+                  (ngModelChange)="updateBookingStatus(booking, $event)">
+
+                  <option
+                    *ngFor="let status of bookingStatuses"
+                    [ngValue]="status">
+                    {{ status }}
+                  </option>
+
+                </select>
+
+                <small *ngIf="updatingBookingId === booking._id">
+                  Saving...
+                </small>
+
+              </div>
             </td>
 
-
-            <!-- Status -->
-            <td>
-
-              <span
-                class="status-badge"
-                [class.confirmed]="
-                  booking.status.toLowerCase() === 'confirmed'
-                "
-                [class.cancelled]="
-                  booking.status.toLowerCase() === 'cancelled'
-                "
-              >
-                {{ booking.status | titlecase }}
-              </span>
-
-            </td>
-
-
-            <!-- Booked On -->
             <td>
               {{ booking.createdAt | date:'dd/MM/yyyy' }}
             </td>
 
-
-            <!-- Action -->
             <td>
-
               <button
+                type="button"
                 class="view-passengers-btn"
-                (click)="togglePassengerDetails(booking._id)"
-              >
+                (click)="togglePassengerDetails(booking._id)">
 
                 {{
                   expandedBookingId === booking._id
@@ -196,34 +161,22 @@
                 }}
 
               </button>
-
             </td>
-
           </tr>
 
-
-          <!-- Passenger Details -->
           <tr
             class="passenger-details-row"
-            *ngIf="expandedBookingId === booking._id"
-          >
+            *ngIf="expandedBookingId === booking._id">
 
-            <td
-              colspan="11"
-            >
-
+            <td colspan="11">
               <div class="passenger-details">
 
                 <div class="passenger-header">
-
                   <div>
                     <h3>Passenger Details</h3>
-
                     <p>
                       PNR:
-                      <strong>
-                        {{ booking.pnr }}
-                      </strong>
+                      <strong>{{ booking.pnr }}</strong>
                     </p>
                   </div>
 
@@ -233,34 +186,25 @@
                       {{ booking.passengers?.length || 0 }}
                     </strong>
                   </div>
-
                 </div>
-
-
-                <!-- Passenger Cards -->
 
                 <div
                   class="passenger-grid"
-                  *ngIf="booking.passengers?.length"
-                >
+                  *ngIf="booking.passengers?.length">
 
                   <div
                     class="passenger-card"
                     *ngFor="
                       let passenger of booking.passengers;
                       let passengerIndex = index
-                    "
-                  >
+                    ">
 
                     <div class="passenger-number">
                       {{ passengerIndex + 1 }}
                     </div>
 
                     <div class="passenger-info">
-
-                      <h4>
-                        {{ passenger.name }}
-                      </h4>
+                      <h4>{{ passenger.name }}</h4>
 
                       <p>
                         <strong>Age:</strong>
@@ -271,49 +215,29 @@
                         <strong>Gender:</strong>
                         {{ passenger.gender | titlecase }}
                       </p>
-
                     </div>
 
                   </div>
-
                 </div>
 
-
-                <!-- No Passenger -->
                 <div
                   class="no-passengers"
-                  *ngIf="!booking.passengers?.length"
-                >
+                  *ngIf="!booking.passengers?.length">
                   No passenger details available.
                 </div>
 
               </div>
-
             </td>
-
           </tr>
 
         </ng-container>
 
-
-        <!-- No Bookings -->
-        <tr
-          *ngIf="bookings.length === 0"
-        >
-
-          <td
-            colspan="11"
-            class="no-data"
-          >
+        <tr *ngIf="bookings.length === 0">
+          <td colspan="11" class="no-data">
             No bookings found.
           </td>
-
         </tr>
-
       </tbody>
-
     </table>
-
   </div>
-
 </div>
