@@ -1,3 +1,4 @@
+
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -10,7 +11,6 @@ import { AuthService } from '../../core/services/auth';
   styleUrl: './login.css'
 })
 export class Login {
-
   private authService = inject(AuthService);
   private router = inject(Router);
 
@@ -25,53 +25,79 @@ export class Login {
     this.message = '';
     this.errorMessage = '';
 
-    // Check empty fields
-    if (!this.email || !this.password) {
+    if (!this.email.trim() || !this.password) {
       this.errorMessage = 'Please enter email and password';
       return;
     }
 
-    console.log('Login button clicked');
-    console.log('Email:', this.email);
-    console.log('Sending login request to backend...');
-
     this.isLoading = true;
 
-    this.authService
-      .login(this.email, this.password)
-      .subscribe({
-        next: (response) => {
+    this.authService.login(
+      this.email.trim(),
+      this.password
+    ).subscribe({
+      next: (response) => {
+        this.isLoading = false;
 
-          console.log('LOGIN RESPONSE:', response);
+        console.log('LOGIN RESPONSE:', response);
+        console.log('LOGIN USER:', response.user);
+        console.log('LOGIN USER ROLE:', response.user?.role);
 
-          this.isLoading = false;
-
-          if (response.token) {
-            this.authService.saveToken(response.token);
-          }
-
-          this.message = response.message;
-
-          setTimeout(() => {
-            this.router.navigate(['/dashboard']);
-          }, 500);
-        },
-
-        error: (error) => {
-
-          console.error('LOGIN ERROR:', error);
-          console.error('SERVER RESPONSE:', error.error);
-
-          this.isLoading = false;
-
+        if (!response.success || !response.token) {
           this.errorMessage =
-            error.error?.message ||
-            `Error ${error.status}: ${error.message}`;
-        },
-
-        complete: () => {
-          console.log('Login request completed');
+            response.message || 'Login failed';
+          return;
         }
-      });
+
+        const user = response.user;
+
+        if (!user?.id || !user?.name || !user?.email) {
+          this.errorMessage =
+            'Login response is missing user details. Please check the backend response.';
+          console.error('Incomplete login user:', user);
+          return;
+        }
+
+        const role = String(user.role ?? '')
+          .trim()
+          .toLowerCase();
+
+        if (role !== 'admin' && role !== 'user') {
+          this.errorMessage =
+            'Login succeeded, but the server did not return a valid user role.';
+          console.error('Invalid user role:', role);
+          return;
+        }
+
+        this.authService.saveToken(response.token);
+
+        this.authService.saveUser({
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role: role
+        });
+
+        if (role === 'admin') {
+          console.log('Redirecting to Admin Dashboard');
+
+          this.router.navigateByUrl('/admin/dashboard');
+        } else {
+          console.log('Redirecting to User Dashboard');
+
+          this.router.navigateByUrl('/user/dashboard');
+        }
+      },
+
+      error: (error) => {
+        this.isLoading = false;
+
+        console.error('Login error:', error);
+
+        this.errorMessage =
+          error?.error?.message ||
+          `Error ${error.status}: ${error.message}`;
+      }
+    });
   }
 }
