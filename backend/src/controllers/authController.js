@@ -1,3 +1,4 @@
+
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const generateToken = require("../utils/generateToken");
@@ -9,7 +10,6 @@ const registerUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
 
-        // Check required fields
         if (!name || !email || !password) {
             return res.status(400).json({
                 success: false,
@@ -17,8 +17,9 @@ const registerUser = async (req, res) => {
             });
         }
 
-        // Check if user already exists
-        const existingUser = await User.findOne({ email });
+        const existingUser = await User.findOne({
+            email: email.trim().toLowerCase()
+        });
 
         if (existingUser) {
             return res.status(400).json({
@@ -27,34 +28,32 @@ const registerUser = async (req, res) => {
             });
         }
 
-        // Hash password
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Create user
         const user = await User.create({
             name,
-            email,
+            email: email.trim().toLowerCase(),
             password: hashedPassword
         });
 
-        // Generate JWT token
         const token = generateToken(user._id);
 
-        res.status(201).json({
+        return res.status(201).json({
             success: true,
             message: "User registered successfully",
             token,
             user: {
                 id: user._id,
                 name: user.name,
-                email: user.email
+                email: user.email,
+                role: user.role || "user"
             }
         });
 
     } catch (error) {
         console.error("Register error:", error.message);
 
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
             message: "Server error"
         });
@@ -69,7 +68,6 @@ const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // Check required fields
         if (!email || !password) {
             return res.status(400).json({
                 success: false,
@@ -77,8 +75,9 @@ const loginUser = async (req, res) => {
             });
         }
 
-        // Find user
-        const user = await User.findOne({ email });
+        const user = await User.findOne({
+            email: email.trim().toLowerCase()
+        });
 
         if (!user) {
             return res.status(401).json({
@@ -87,7 +86,6 @@ const loginUser = async (req, res) => {
             });
         }
 
-        // Verify password
         const isPasswordCorrect = await bcrypt.compare(
             password,
             user.password
@@ -100,24 +98,24 @@ const loginUser = async (req, res) => {
             });
         }
 
-        // Generate JWT token
         const token = generateToken(user._id);
 
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             message: "Login successful",
             token,
             user: {
                 id: user._id,
                 name: user.name,
-                email: user.email
+                email: user.email,
+                role: user.role || "user"
             }
         });
 
     } catch (error) {
         console.error("Login error:", error.message);
 
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
             message: "Server error"
         });
