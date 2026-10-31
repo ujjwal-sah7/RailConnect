@@ -1,161 +1,106 @@
-🌐 Live Application
+# 🚆 RailConnect — Full-Stack Railway Management Application
 
-🚆 RailConnect is deployed and available online.
+**Live Application:** https://railconnect-ujjwal.netlify.app/
 
-🔗 https://railconnect-ujjwal.netlify.app/
+RailConnect is a full-stack railway management web application built using the MEAN Stack. It provides a responsive user interface, user authentication, railway information management, and administrative functionality through a modular frontend and RESTful backend architecture.
 
-✨ Key Features
+## ✨ Key Features
 
-🚆 Modern and responsive railway platform
+- 🚆 Responsive Angular-based user interface
+- 🔐 User authentication using JWT
+- 👤 User account management
+- 🔎 Railway and travel information
+- 🎫 Train booking and booking management
+- 🚉 Train and station management
+- 📊 Administrative dashboard
+- 🌐 RESTful API integration
+- 🗄️ Persistent data storage using MongoDB Atlas
+- 🔒 Password hashing using bcryptjs
+- 🧩 Modular and maintainable project structure
 
-🔐 Secure user authentication
+## 🛠️ Technology Stack
 
-👤 User account management
+**Frontend**
+- Angular
+- TypeScript
+- HTML5 and CSS3
+- Angular Router
+- Angular HTTP Client
 
-🔎 Railway and travel information
+**Backend**
+- Node.js
+- Express.js
+- REST APIs
+- JSON Web Tokens (JWT)
+- bcryptjs
+- CORS
 
-🌐 RESTful API integration
+**Database**
+- MongoDB
+- MongoDB Atlas
+- Mongoose
 
-🗄️ MongoDB database integration
+**Tools and Platforms**
+- Visual Studio Code
+- Git and GitHub
+- npm
+- Postman
+- Netlify — frontend deployment
+- Render — backend deployment
 
-⚡ Fast and scalable backend architecture
+## 🏗️ Project Architecture
 
-📱 Responsive user interface
+RailConnect follows a three-layer full-stack architecture, separating the presentation layer, backend application logic, and database layer.
 
-🔄 Real-time communication between frontend and backend
-
-🛡️ Secure password handling and authentication
-
-🧩 Modular and maintainable project structure
-
-🛠️ Technology Stack
-
-Frontend
-
-Angular
-
-TypeScript
-
-HTML5
-
-CSS3
-
-Angular Router
-
-Angular HTTP Client
-
-Backend
-
-Node.js
-
-Express.js
-
-REST API
-
-JWT
-
-bcryptjs
-
-CORS
-
-Database
-
-MongoDB
-
+```text
+Angular Frontend (Netlify)
+          |
+          | HTTP / REST API
+          ▼
+Node.js + Express.js Backend (Render)
+          |
+          | Mongoose ODM
+          ▼
 MongoDB Atlas
+```
 
-Mongoose
+This separation improves maintainability and supports future enhancements.
 
-Tools & Platforms
+## 🔄 Application Workflow
 
-Visual Studio Code
+1. Users interact with the Angular frontend.
+2. The frontend sends HTTP requests to the Express.js REST API.
+3. The backend processes requests and handles authentication and application logic.
+4. Mongoose communicates with MongoDB Atlas to read or update persistent data.
+5. The backend returns responses to the frontend.
+6. Angular updates the interface based on the response.
 
-Git
+## 🎯 Project Objectives
 
-GitHub
+- Develop a full-stack web application using the MEAN Stack.
+- Build a responsive frontend using Angular.
+- Create RESTful APIs with Node.js and Express.js.
+- Integrate MongoDB for persistent data management.
+- Implement token-based authentication and password hashing.
+- Establish reliable frontend–backend communication.
+- Maintain a modular and extensible software architecture.
 
-npm
+## 🚀 Future Enhancements
 
-Postman
+- 📍 Live train status and real-time tracking
+- 🗺️ Interactive railway maps
+- 💳 Online payment gateway integration
+- 🔔 Travel notifications and alerts
+- 📧 Email notifications
+- ⭐ User reviews and ratings
+- 📱 Progressive Web App (PWA) support
 
-🏗️ Project Architecture
+## 🌐 Deployment
 
-RailConnect follows a three-layer full-stack architecture:
+- **Frontend:** https://railconnect-ujjwal.netlify.app/
+- **Backend API:** https://railconnect-399k.onrender.com
+- **API Health Check:** https://railconnect-399k.onrender.com/api/health
 
-Angular Frontend
-       │
-       │ HTTP / REST API
-       ▼
-Node.js + Express.js Backend
-       │
-       │ Mongoose
-       ▼
-MongoDB Atlas
+## 📌 Project Summary
 
-This architecture provides a clear separation between the presentation layer, application logic, and data layer, making the application easier to maintain, test, and extend.
-
-
-🔄 Application Workflow
-
-User
- │
- ▼
-Angular Frontend
- │
- ▼
-REST API Requests
- │
- ▼
-Express.js / Node.js
- │
- ▼
-Mongoose
- │
- ▼
-MongoDB Atlas
- │
- ▼
-Response
- │
- ▼
-Angular Frontend
-
-🎯 Project Objectives
-
-The primary objectives of RailConnect are to:
-
-Build a complete full-stack web application using the MEAN Stack
-
-Implement a scalable frontend using Angular
-
-Develop RESTful APIs using Node.js and Express.js
-
-Integrate MongoDB for persistent data management
-
-Implement secure authentication mechanisms
-
-Establish efficient frontend–backend communication
-
-Follow a modular and maintainable software architecture
-
-🚀 Future Enhancements
-
-🎫 Online ticket booking
-
-🚉 Live train status
-
-📍 Real-time train tracking
-
-🗺️ Interactive railway maps
-
-💳 Online payment integration
-
-🔔 Travel notifications
-
-📧 Email notifications
-
-📊 Administrative dashboard
-
-⭐ User reviews and ratings
-
-📱 Progressive Web App support
+RailConnect demonstrates practical full-stack development skills, including Angular frontend development, REST API design, authentication, database integration, deployment, and administrative operations.
