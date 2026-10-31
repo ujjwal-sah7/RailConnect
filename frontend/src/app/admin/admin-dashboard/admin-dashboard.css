@@ -6,7 +6,6 @@
   box-sizing: border-box;
 }
 
-/* Header */
 .dashboard-header {
   margin-bottom: 30px;
 }
@@ -24,17 +23,15 @@
   font-size: 15px;
 }
 
-/* Statistics grid */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 20px;
 }
 
-/* Clickable statistic cards */
 .stat-card {
   box-sizing: border-box;
-  background: #fff;
+  background: #ffffff;
   border-radius: 14px;
   padding: 22px;
   display: flex;
@@ -44,9 +41,6 @@
   color: inherit;
   text-decoration: none;
   cursor: pointer;
-  position: relative;
-  z-index: 1;
-  pointer-events: auto;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
   border: 1px solid #e5e7eb;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -66,7 +60,6 @@
   transform: scale(0.99);
 }
 
-/* Icon */
 .stat-icon {
   width: 55px;
   height: 55px;
@@ -79,7 +72,6 @@
   flex-shrink: 0;
 }
 
-/* Card content */
 .stat-content {
   min-width: 0;
 }
@@ -106,7 +98,6 @@
   font-weight: 600;
 }
 
-/* Revenue card */
 .revenue-card {
   grid-column: span 2;
 }
@@ -115,16 +106,14 @@
   background: #ecfdf5;
 }
 
-/* Loading */
 .loading {
-  background: #fff;
+  background: #ffffff;
   padding: 40px;
   text-align: center;
   border-radius: 14px;
   color: #6b7280;
 }
 
-/* Error */
 .error-message {
   background: #fef2f2;
   border: 1px solid #fecaca;
@@ -141,17 +130,16 @@
 .error-message button {
   border: none;
   background: #dc2626;
-  color: #fff;
+  color: #ffffff;
   padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
 }
 
 .error-message button:hover {
-  background: #b91c1c;
+  background: #b91b1b;
 }
 
-/* Responsive layout */
 @media (max-width: 1100px) {
   .stats-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
